@@ -1,0 +1,35 @@
+{
+    "name": "ziiven/view-history",
+    "description": "A Flarum extension. Allow user to see the view history.",
+    "type": "flarum-extension",
+    "license": "MIT",
+    "require": {
+        "flarum/core": "^1.0"
+    },
+    "support": {
+        "issues": "https://github.com/Ziiven/flarum-daily-check-in/issues",
+        "source": "https://github.com/Ziiven/flarum-daily-check-in"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Ziven\\viewHistory\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ziven"
+        }
+    ],
+    "extra": {
+        "flarum-extension": {
+            "title": "Ziven View History",
+            "icon": {
+                "name": "fas fa-history",
+                "backgroundColor": "#238c59",
+                "color": "#fff"
+            }
+        }
+    }
+}

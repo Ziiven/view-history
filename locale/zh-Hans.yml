@@ -1,0 +1,6 @@
+ziven-view-history:
+  forum:
+    view-history: 浏览历史
+    view-history-empty: 没有浏览历史
+    view-history-delete-all: 删除所有浏览历史
+    view-history-delete-all-confirmation: 你确定要删除所有浏览历史吗？
