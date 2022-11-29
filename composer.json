@@ -1,14 +1,14 @@
 {
     "name": "ziiven/view-history",
-    "description": "A Flarum extension. Allow user to see the view history.",
+    "description": "A Flarum extension. Allow user to see the view history of discussions.",
     "type": "flarum-extension",
     "license": "MIT",
     "require": {
         "flarum/core": "^1.0"
     },
     "support": {
-        "issues": "https://github.com/Ziiven/flarum-daily-check-in/issues",
-        "source": "https://github.com/Ziiven/flarum-daily-check-in"
+        "issues": "https://github.com/Ziiven/view-history/issues",
+        "source": "https://github.com/Ziiven/view-history"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

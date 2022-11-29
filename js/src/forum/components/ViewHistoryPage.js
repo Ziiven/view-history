@@ -7,7 +7,6 @@ export default class ViewHistoryPage extends Page {
 
     app.history.push('viewHistory');
     app.viewHistory.load();
-
     this.bodyClass = 'App--viewHistory';
   }
 

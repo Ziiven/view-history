@@ -22,7 +22,7 @@ class ListHistoryController extends AbstractListController{
     protected function data(ServerRequestInterface $request, Document $document){
         $actor = $request->getAttribute('actor');
         $include = $this->extractInclude($request);
-        $viewHistory = viewHistory::whereVisibleTo($actor)->where('user_id', $actor->id)->orderBy("assigned_at","desc")->take(20)->get();
+        $viewHistory = viewHistory::whereVisibleTo($actor)->where('user_id', $actor->id)->orderBy("assigned_at","desc")->take(30)->get();
 
         $this->loadRelations($viewHistory, $include);
 

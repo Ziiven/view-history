@@ -4,7 +4,6 @@ namespace Ziven\viewHistory\Listeners;
 
 use Flarum\Api\Controller\ShowDiscussionController;
 use Flarum\Discussion\Discussion;
-use Flarum\Discussion\User;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Contracts\Events\Dispatcher;

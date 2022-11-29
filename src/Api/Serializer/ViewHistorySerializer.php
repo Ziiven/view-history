@@ -16,7 +16,6 @@ class ViewHistorySerializer extends AbstractSerializer{
             'discussion_id' => $viewHistory->discussion_id,
             'post_id' => $viewHistory->post_id,
             'user_id' => $viewHistory->user_id,
-            'owner_id' => $viewHistory->discussion->user_id,
         ];
     }
 

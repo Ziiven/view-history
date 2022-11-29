@@ -16,23 +16,27 @@ export default class ViewHistoryList extends Component {
   }
 
   deleteAll(e) {
-
     if (!confirm(app.translator.trans('ziven-view-history.forum.view-history-delete-all-confirmation'))){ return; }
 
-    app.request({
-        method: 'DELETE',
-        url: app.forum.attribute('apiUrl') + '/viewHistory/deleteAll',
-      })
-      .then(() => {
-        app.store.data.viewHistory = [];
-        m.redraw();
-      });
+    let viewHistoryList = app.store.all('viewHistory');
+
+    if(viewHistoryList.length>0){
+      app.request({
+          method: 'DELETE',
+          url: app.forum.attribute('apiUrl') + '/viewHistory/deleteAll',
+        })
+        .then(() => {
+          app.store.data.viewHistory = [];
+          m.redraw();
+        });
+    }
   }
 
   view(){
     if(!this.state){ return; }
 
-    const viewHistoryList = this.state.cache || [];
+    let viewHistoryList = app.store.all('viewHistory');
+    viewHistoryList.sort((a, b) => new Date(b.assignedAt()) - new Date(a.assignedAt()));
 
     return (
       <div className="NotificationList">
