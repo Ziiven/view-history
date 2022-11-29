@@ -9,6 +9,8 @@ export default function () {
       return;
     }
 
-    items.add('viewHistory', <ViewHistoryDropdown state={app.viewHistory} />, 20);
+    if(app.session.user.preferences().viewHistoryEnable){
+      items.add('viewHistory', <ViewHistoryDropdown state={app.viewHistory} />, 20);
+    }
   });
 }

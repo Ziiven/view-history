@@ -2,7 +2,6 @@ export default class ViewHistoryListState {
   constructor(app) {
     this.app = app;
     this.loading = false;
-    this.cache = [];
   }
 
   load() {
@@ -11,8 +10,8 @@ export default class ViewHistoryListState {
 
     this.app.store
       .find('viewHistory')
-      .then((response) => {
-        this.cache = response.payload.data;
+      .then((viewHistory) => {
+        this.cache = viewHistory.sort((a, b) => b.id() - a.id());
       })
       .catch(() => {})
       .then(() => {

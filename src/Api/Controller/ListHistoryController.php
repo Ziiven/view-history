@@ -14,17 +14,17 @@ class ListHistoryController extends AbstractListController{
     public $serializer = ViewHistorySerializer::class;
     public $include = [
         'user',
-        'discussion',
-        'discussion.user',
+        'post',
+        'post.user',
+        'post.discussion'
     ];
 
     protected function data(ServerRequestInterface $request, Document $document){
         $actor = $request->getAttribute('actor');
         $include = $this->extractInclude($request);
-        $viewHistory = viewHistory::whereVisibleTo($actor)->where('user_id', $actor->id)->orderBy("assigned_at","desc")->get();
+        $viewHistory = viewHistory::whereVisibleTo($actor)->where('user_id', $actor->id)->orderBy("assigned_at","desc")->take(20)->get();
 
         $this->loadRelations($viewHistory, $include);
-        // app('log')->error(json_encode($viewHistory));
 
         return $viewHistory;
     }

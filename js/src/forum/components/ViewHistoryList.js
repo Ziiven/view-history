@@ -4,12 +4,29 @@ import LoadingIndicator from 'flarum/common/components/LoadingIndicator';
 import Button from 'flarum/common/components/Button';
 import Tooltip from 'flarum/common/components/Tooltip';
 import humanTime from 'flarum/common/helpers/humanTime';
+import username from 'flarum/common/helpers/username';
 import avatar from 'flarum/common/helpers/avatar';
+import Link from 'flarum/common/components/Link';
+import icon from 'flarum/common/helpers/icon';
 
 export default class ViewHistoryList extends Component {
   oncreate(vnode){
     super.oninit(vnode);
     this.state = this.attrs.state;
+  }
+
+  deleteAll(e) {
+
+    if (!confirm(app.translator.trans('ziven-view-history.forum.view-history-delete-all-confirmation'))){ return; }
+
+    app.request({
+        method: 'DELETE',
+        url: app.forum.attribute('apiUrl') + '/viewHistory/deleteAll',
+      })
+      .then(() => {
+        app.store.data.viewHistory = [];
+        m.redraw();
+      });
   }
 
   view(){
@@ -21,19 +38,44 @@ export default class ViewHistoryList extends Component {
       <div className="NotificationList">
         <div className="NotificationList-header">
           <h4 className="App-titleControl App-titleControl--text">{app.translator.trans('ziven-view-history.forum.view-history')}</h4>
+          <div class="App-primaryControl">
+            <Button
+                data-container="body"
+                icon="fas fa-trash-alt"
+                className="Button Button--link Button--icon Alert-dismiss"
+                onclick={this.deleteAll.bind(this)}
+              />
+          </div>
         </div>
         <div className="NotificationList-content">
           <ul className="NotificationGroup-content">
             {viewHistoryList.length ? (
               viewHistoryList.map((viewHistory) => {
-                // const tt = viewHistory.user();
-                // const post = viewHistory.discussion();
-                console.log(viewHistory.user());
-
+                const post = viewHistory.post();
+                const user = post.user();
+                
                 return (
-                  <div>
-                    {humanTime(viewHistory.attributes.assigned_at)}
-                  </div>
+                  <li>
+                    <Link
+                      href={app.route.post(post)}
+                      className="Notification"
+                      onclick={(e) => {
+                        e.redraw = false;
+                      }}
+                    >
+                      {avatar(user)}
+                      {icon('fas', { className: 'Notification-icon' })}
+                      <span className="Notification-content">
+                        {app.translator.trans('flarum-flags.forum.flagged_posts.item_text', {
+                          username: username(post.user()),
+                          em: <em />,
+                          discussion: post.discussion().title(),
+                        })}
+                      </span>
+                      {humanTime(viewHistory.assignedAt())}
+                      <div className="Notification-excerpt">{post.contentPlain()}</div>
+                    </Link>
+                  </li>
                 );
               })
             ) : !this.state.loading ? (

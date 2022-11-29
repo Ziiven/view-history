@@ -4,3 +4,4 @@ ziven-view-history:
     view-history-empty: 没有浏览历史
     view-history-delete-all: 删除所有浏览历史
     view-history-delete-all-confirmation: 你确定要删除所有浏览历史吗？
+    view-history-enable: 显示浏览历史

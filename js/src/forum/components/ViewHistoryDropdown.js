@@ -17,7 +17,7 @@ export default class ViewHistoryDropdown extends NotificationsDropdown {
   }
 
   goToRoute() {
-    m.route.set(app.route('viewHisotry'));
+    m.route.set(app.route('viewHistory'));
   }
 
   getUnreadCount() {
