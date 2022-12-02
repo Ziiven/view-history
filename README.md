@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg) 
 
-A [Flarum](http://flarum.org) extension. Allow user to see the view history of discussion.
+A [Flarum](http://flarum.org) extension. Allow user to see the view history of discussions.
 一个Flarum扩展。允许用户查看帖子的浏览历史。  
 
 ### Installation
