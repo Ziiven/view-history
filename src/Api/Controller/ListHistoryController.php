@@ -7,7 +7,7 @@ use Flarum\Http\RequestUtil;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
-use Ziven\viewHistory\Model\viewHistory;
+use Ziven\viewHistory\Model\ViewHistory;
 use Ziven\viewHistory\Api\Serializer\ViewHistorySerializer;
 
 class ListHistoryController extends AbstractListController{
@@ -22,7 +22,7 @@ class ListHistoryController extends AbstractListController{
     protected function data(ServerRequestInterface $request, Document $document){
         $actor = $request->getAttribute('actor');
         $include = $this->extractInclude($request);
-        $viewHistory = viewHistory::whereVisibleTo($actor)->where('user_id', $actor->id)->orderBy("assigned_at","desc")->take(30)->get();
+        $viewHistory = ViewHistory::whereVisibleTo($actor)->where('user_id', $actor->id)->orderBy("assigned_at","desc")->take(30)->get();
 
         $this->loadRelations($viewHistory, $include);
 
