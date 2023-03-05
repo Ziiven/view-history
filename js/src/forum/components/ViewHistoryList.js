@@ -38,6 +38,13 @@ export default class ViewHistoryList extends Component {
     let viewHistoryList = app.store.all('viewHistory');
     viewHistoryList.sort((a, b) => new Date(b.assignedAt()) - new Date(a.assignedAt()));
 
+    let avatarWithFrame,usernameWithColor;
+    if('ziiven-decoration-store' in flarum.extensions){
+      const { components } = require('@ziiven-decoration-store');
+      avatarWithFrame = components.avatarWithFrame;
+      usernameWithColor = components.usernameWithColor;
+    }
+
     return (
       <div className="NotificationList">
         <div className="NotificationList-header">
@@ -67,11 +74,11 @@ export default class ViewHistoryList extends Component {
                         e.redraw = false;
                       }}
                     >
-                      {avatar(user)}
+                      {avatarWithFrame?avatarWithFrame(user):avatar(user)}
                       {icon('fas', { className: 'Notification-icon' })}
                       <span className="Notification-content">
                         {app.translator.trans('flarum-flags.forum.flagged_posts.item_text', {
-                          username: username(post.user()),
+                          username: usernameWithColor?usernameWithColor(post.user()):username(post.user()),
                           em: <em />,
                           discussion: post.discussion().title(),
                         })}
