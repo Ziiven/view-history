@@ -30,7 +30,9 @@ class DiscussionViewedHandler
                 $postID = $discussion->first_post_id;
                 $matchCondition = ['user_id'=>$currentUserID,'discussion_id'=>$discussionID];
                 
-                ViewHistory::updateOrCreate($matchCondition,['assigned_at'=>Carbon::now('Asia/Shanghai'),'post_id'=>$postID]);
+                if($postID){
+                 ViewHistory::updateOrCreate($matchCondition,['assigned_at'=>Carbon::now('Asia/Shanghai'),'post_id'=>$postID]);
+                }
             }
         }
     }
